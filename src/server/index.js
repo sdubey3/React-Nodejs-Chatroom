@@ -3,7 +3,7 @@ const koa = require("koa");
 const app = new koa();
 const http = require("http");
 
-app.use(serve({ rootDir: "../../dist" }));
+app.use(serve({ rootDir: "./dist" }));
 
 app.use(async next => {
   if (this.path !== "/") {
