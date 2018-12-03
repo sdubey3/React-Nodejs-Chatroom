@@ -52,7 +52,7 @@ class Welcome extends Component {
 
     this.state = {
       value: 0,
-      formValue: ""
+      formValue: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -94,21 +94,38 @@ class Welcome extends Component {
 
   selectRoom(room) {
     const username = document.getElementById("join-username").value;
-    const { app, users } = this.props;
+    const { formValue } = this.state;
     let error = false;
 
     if (username.length === 0) {
       alert("Username cannot be blank. Please enter a username.");
       return;
     }
-    // users.getUsers.forEach(function(element) {
-    //   if (username === element.username) error = true;
-    // });
+    if (formValue === null) {
+      alert("Please select a room. If there are no rooms, create one.");
+      return;
+    }
+
     if (error) {
       alert("Username already taken. Please enter a unique name.");
       return;
     } else {
       this.props.dispatch(login({ username, room }));
+    }
+  }
+
+  handleKeyPress() {
+    if (event.key === "Enter") {
+      switch (this.state.value) {
+        case 0:
+          this.selectRoom();
+
+        case 1:
+          this.createRoom();
+
+        default:
+      }
+      this.handleSend();
     }
   }
 
@@ -145,6 +162,7 @@ class Welcome extends Component {
                 label="Username"
                 type="text"
                 fullWidth
+                onKeyPress={this.handleKeyPress.bind(this)}
               />
               <br />
               <br />
@@ -173,7 +191,7 @@ class Welcome extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.selectRoom.bind(this, formValue)}
+                onClick={this.selectRoom.bind(this)}
               >
                 Join
               </Button>
@@ -193,6 +211,7 @@ class Welcome extends Component {
                 label="Username"
                 type="text"
                 fullWidth
+                onKeyPress={this.handleKeyPress.bind(this)}
               />
               <TextField
                 autoFocus
@@ -201,6 +220,7 @@ class Welcome extends Component {
                 label="Chatroom Name"
                 type="text"
                 fullWidth
+                onKeyPress={this.handleKeyPress.bind(this)}
               />
             </DialogContent>
             <DialogActions>

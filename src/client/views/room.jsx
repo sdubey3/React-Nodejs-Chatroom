@@ -40,6 +40,12 @@ class Room extends Component {
     document.getElementById("room-message").value = "";
   }
 
+  handleKeyPress() {
+    if (event.key === "Enter") {
+      this.handleSend();
+    }
+  }
+
   handleLogout() {
     this.props.dispatch(logout());
   }
@@ -107,6 +113,7 @@ class Room extends Component {
               id="room-message"
               fullWidth={true}
               placeholder="Write your message here..."
+              onKeyPress={this.handleKeyPress.bind(this)}
             />
           </div>
           <div style={btnStyles}>
