@@ -5,7 +5,6 @@ import {
   logout,
   addUser,
   removeUser,
-  getUsers,
   newMessage,
   newRoom,
   getRoom
@@ -53,10 +52,6 @@ const users = createReducer(
       const newState = { ...state };
       delete newState[payload.username];
       return newState;
-    },
-    [getUsers]: (state, payload) => {
-      const { users } = payload;
-      return { ...state, users: users };
     }
   },
   initial.users

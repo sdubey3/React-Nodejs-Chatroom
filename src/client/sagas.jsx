@@ -6,10 +6,8 @@ import {
   logout,
   addUser,
   removeUser,
-  getUsers,
   newMessage,
   sendMessage,
-  newRoom,
   getRoom
 } from "./actions";
 

@@ -87,7 +87,7 @@ class Room extends Component {
   }
 
   render() {
-    const { app, users, messages, room } = this.props;
+    const { app, messages, room } = this.props;
 
     const msgs = messages.entities.map((item, i) =>
       this.renderMessages(item, i)
