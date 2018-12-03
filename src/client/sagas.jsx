@@ -14,7 +14,7 @@ import {
 } from "./actions";
 
 function connect() {
-  const socket = io("http://localhost:3000");
+  const socket = io("http://ec2-18-223-44-43.us-east-2.compute.amazonaws.com/");
   return new Promise(resolve => {
     socket.on("connect", () => {
       resolve(socket);
