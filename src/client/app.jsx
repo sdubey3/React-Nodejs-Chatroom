@@ -1,9 +1,6 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import AppBar from "@material-ui/core/AppBar/AppBar";
-import Button from "@material-ui/core/Button/Button";
 import { Welcome, Room } from "./views";
-import { logout } from "./actions";
 
 class App extends Component {
   render() {

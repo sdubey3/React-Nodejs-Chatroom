@@ -8,6 +8,7 @@ import {
   removeUser,
   newMessage,
   sendMessage,
+  newRoom,
   getRoom
 } from "./actions";
 

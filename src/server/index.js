@@ -53,14 +53,14 @@ io.on("connection", function(socket) {
     socket.disconnect(true);
   });
 
-  function findRooms(socket) {
+  function findRooms() {
     let availableRooms = [];
     const rooms = io.sockets.adapter.rooms;
     const sockets = io.sockets.sockets;
     if (rooms) {
       for (const room in rooms) {
         if (!sockets[room]) {
-          if (room.slice(0, 2) === "/#") continue;
+          // if (room.slice(0, 2) === "/#") continue;
           availableRooms.push({
             name: room,
             counts: io.sockets.adapter.rooms[room].length
@@ -71,7 +71,7 @@ io.on("connection", function(socket) {
     return availableRooms;
   }
   socket.on("rooms", function() {
-    const rooms = findRooms(socket);
+    const rooms = findRooms();
     io.emit("rooms.list", { rooms: rooms });
   });
 });

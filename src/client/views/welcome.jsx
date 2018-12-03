@@ -104,12 +104,8 @@ class Welcome extends Component {
     if (formValue === null) {
       alert("Please select a room. If there are no rooms, create one.");
       return;
-    }
-
-    if (error) {
-      alert("Username already taken. Please enter a unique name.");
-      return;
     } else {
+      let room = formValue;
       this.props.dispatch(login({ username, room }));
     }
   }
@@ -118,14 +114,11 @@ class Welcome extends Component {
     if (event.key === "Enter") {
       switch (this.state.value) {
         case 0:
-          this.selectRoom();
+          this.selectRoom.bind(this);
 
         case 1:
-          this.createRoom();
-
-        default:
+          this.createRoom.bind(this);
       }
-      this.handleSend();
     }
   }
 
