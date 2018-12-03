@@ -77,7 +77,7 @@ class Welcome extends Component {
       return;
     }
 
-    if (app.rooms === null) {
+    if (app.rooms.length === null) {
       return;
     }
 
@@ -85,7 +85,7 @@ class Welcome extends Component {
       if (room === element.name) error = true;
     });
     if (error) {
-      alert("Name already taken. Please enter a unique name.");
+      alert("Chatroom name already taken. Please enter a unique name.");
     } else {
       this.props.dispatch(newRoom({ room }));
       this.props.dispatch(login({ username, room }));
@@ -94,8 +94,18 @@ class Welcome extends Component {
 
   selectRoom(room) {
     const username = document.getElementById("join-username").value;
+    const { app, users } = this.props;
+    let error = false;
+
     if (username.length === 0) {
       alert("Username cannot be blank. Please enter a username.");
+      return;
+    }
+    // users.getUsers.forEach(function(element) {
+    //   if (username === element.username) error = true;
+    // });
+    if (error) {
+      alert("Username already taken. Please enter a unique name.");
       return;
     } else {
       this.props.dispatch(login({ username, room }));
@@ -111,7 +121,7 @@ class Welcome extends Component {
   };
 
   render() {
-    const { app } = this.props;
+    const { app, users } = this.props;
     const { value, formValue } = this.state;
 
     return (

@@ -6,6 +6,7 @@ import {
   logout,
   addUser,
   removeUser,
+  getUsers,
   newMessage,
   sendMessage,
   newRoom,
@@ -27,7 +28,7 @@ function subscribe(socket) {
       emit(getRoom({ rooms }));
     });
     socket.on("users.login", ({ username, room }) => {
-      emit(addUser({ username }));
+      emit(addUser({ username, room }));
     });
     socket.on("users.logout", ({ username }) => {
       emit(removeUser({ username }));

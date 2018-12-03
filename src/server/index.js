@@ -44,13 +44,23 @@ io.on("connection", function(socket) {
       socket.leave(activeroom);
     }
   });
-  function findRooms() {
+
+  socket.on("disconnect", function({ username }) {
+    console.log(`[server] disconnected: ${socket.id} disconnect!`);
+
+    const i = usernames.indexOf(username);
+    usernames.splice(i, 1);
+    socket.disconnect(true);
+  });
+
+  function findRooms(socket) {
     let availableRooms = [];
     const rooms = io.sockets.adapter.rooms;
+    const sockets = io.sockets.sockets;
     if (rooms) {
       for (const room in rooms) {
-        if (!rooms[room].hasOwnProperty(room)) {
-          if (room.slice(0, 2) == "/#") continue;
+        if (!sockets[room]) {
+          if (room.slice(0, 2) === "/#") continue;
           availableRooms.push({
             name: room,
             counts: io.sockets.adapter.rooms[room].length
@@ -61,7 +71,7 @@ io.on("connection", function(socket) {
     return availableRooms;
   }
   socket.on("rooms", function() {
-    const rooms = findRooms();
+    const rooms = findRooms(socket);
     io.emit("rooms.list", { rooms: rooms });
   });
 });
